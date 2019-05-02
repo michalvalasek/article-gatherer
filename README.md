@@ -15,7 +15,7 @@ You'll need the `faastruby` gem installed. You'll also need [Sendgrid](https://s
 5. Install faastruby cli: `gem install faastruby`
 5. Run the project: `faastruby local`
 
-# Database
+## Database
 
 You need a postgres database with one table `articles` for storing the links that we already scraped, so that we don't send the same link twice.
 

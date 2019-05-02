@@ -21,7 +21,7 @@ def handler(event)
 
   filtered = scraped.select do |item|
     begin
-      db[:articles].insert(item.slice(:title, :url)) == 1
+      db[:articles].insert(item.slice(:title, :url)) > 0
     rescue Sequel::UniqueConstraintViolation
       false
     end
@@ -58,7 +58,7 @@ def send_email(env, content)
   sg = SendGrid::API.new(api_key: env['sendgrid'])
 
   from = SendGrid::Email.new(email: env['emails_from'])
-  to = SendGrid::Email.new(email: env['email_to'])
+  to = SendGrid::Email.new(email: env['emails_to'])
   subject = "Gatherer: New articles from #{Date.today}"
   mail = SendGrid::Mail.new(from, subject, to, content)
 
