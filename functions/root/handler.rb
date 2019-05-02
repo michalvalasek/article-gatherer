@@ -11,7 +11,8 @@ def handler(event)
   redis = Redis.new(url: env['redis'])
 
   sites = {
-    appsignal: 'https://blog.appsignal.com/'
+    appsignal: 'https://blog.appsignal.com/',
+    martians: 'https://evilmartians.com/chronicles'
   }
 
   scraped = sites.map do |site, url|
@@ -37,9 +38,19 @@ end
 def scrape_appsignal(doc)
   doc.css('article header a').map do |a|
     {
-      site_title: 'App Signal Blog',
+      site_title: 'App Signal',
       title: a.css('h1:first').text.strip.gsub(/\s{2,}/, ' '),
       url: "https://blog.appsignal.com#{a[:href]}"
+    }
+  end
+end
+
+def scrape_martians(doc)
+  doc.css('a.post-list__item').map do |a|
+    {
+      site_title: 'Evil Martians',
+      title: a.css('h1.post-cover__title').text.strip.gsub(/\s{2,}/, ' '),
+      url: "https://evilmartians.com#{a[:href]}"
     }
   end
 end
