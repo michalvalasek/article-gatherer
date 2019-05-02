@@ -17,9 +17,4 @@ runtime: ruby:2.5
 # To schedule periodic runs, follow the example below:
 schedule:
   job1:
-    when: 1 hour after midnight, every day
-#     body: {"foo": "bar"}
-#     method: POST
-#     query_params: {"param": "value"}
-#     headers: {"Content-Type": "application/json"}
-#   job2: ...
+    when: 30 minutes after midnight, every day

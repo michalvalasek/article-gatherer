@@ -1,6 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
-require 'sequel'
+require 'redis'
 require 'sendgrid-ruby'
 require 'erubis'
 
@@ -8,7 +8,7 @@ include SendGrid
 
 def handler(event)
   env = JSON.parse(event.context)
-  db = Sequel.connect(env['postgres'])
+  redis = Redis.new(url: env['redis'])
 
   sites = {
     appsignal: 'https://blog.appsignal.com/'
@@ -20,11 +20,7 @@ def handler(event)
   end.flatten.compact
 
   filtered = scraped.select do |item|
-    begin
-      db[:articles].insert(item.slice(:title, :url)) > 0
-    rescue Sequel::UniqueConstraintViolation
-      false
-    end
+    redis.sadd('gathered', Oj.dump(item))
   end
 
   if filtered.size > 0

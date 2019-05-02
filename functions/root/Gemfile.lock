@@ -7,10 +7,10 @@ GEM
     mustermann (1.0.3)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-    pg (1.1.4)
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
+    redis (4.1.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -28,10 +28,6 @@ GEM
     sendgrid-ruby (5.3.0)
       ruby_http_client (~> 3.3.0)
       sinatra (>= 1.4.7, < 3)
-    sequel (5.20.0)
-    sequel_pg (1.12.0)
-      pg (>= 0.18.0)
-      sequel (>= 4.38.0)
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -45,10 +41,9 @@ PLATFORMS
 DEPENDENCIES
   erubis
   nokogiri
+  redis
   rspec
   sendgrid-ruby
-  sequel (>= 5)
-  sequel_pg
 
 BUNDLED WITH
    1.17.2

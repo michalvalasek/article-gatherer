@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'nokogiri'
-gem 'sequel', '>= 5'
-gem 'sequel_pg', require: 'sequel'
-gem 'sendgrid-ruby'
+gem 'redis'
 gem 'erubis'
+gem 'sendgrid-ruby'
 
 group :test do
   gem 'rspec'
