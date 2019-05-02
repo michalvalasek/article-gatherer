@@ -1,0 +1,38 @@
+project:
+  # The project name
+  name: article-gatherer
+
+  # The project identifier is used to ensure your workspaces will have unique names.
+  # This is not a secret, but don't lose it!
+  identifier: 44a972 # CHANGE THIS IF YOU CLONED THE REPO
+
+  ## The 'public' directory is where you put static files.
+  ## Files will be served from there first, meaning that if
+  ## you have a function at 'functions/product' and a folder
+  ## 'public/product', the public one will take precedence.
+  ## Defaults to 'public'.
+  # public_dir: public
+
+  ## The name of the folder containing the project's functions.
+  ## Defaults to 'functions'.
+  # functions_dir: functions
+
+  ## Opal support (experimental)
+  ## You can use Opal to write Ruby code and have it autocompiled to
+  ## Javascript and placed inside the public assets folder.
+  ## If 'opal_dir' is set, folders inside 'opal_dir' that contain
+  ## a file named 'main.rb' will be compiled using opal
+  # opal_dir: opal
+  ## Destination folder for .js files created by Opal.
+  ## Defaults to PUBLIC_DIR/assets/javascripts
+  # opal_js_destination: public/assets/javascripts
+
+  ## The name of the function that will respond to requests made
+  ## to '/'. Defaults to 'root'
+  # root_to: root
+
+  ## The setting 'catch_all' allows you to capture requests to
+  ## non-existing functions and send them to another function.
+  ## This is useful for setting custom 404 pages, for example.
+  ## Defaults to 'catch-all'.
+  # catch_all: catch-all

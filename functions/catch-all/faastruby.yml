@@ -1,0 +1,25 @@
+---
+cli_version: 0.5.25
+name: catch-all
+runtime: ruby:2.5
+## To run tests before each deploy, uncomment the line below
+## and change the command if you are not using Rspec.
+# test_command: rspec
+
+## You can add commands to run locally before building the deployment package.
+## Some use cases are:
+## * minifying Javascript/CSS
+## * downloading a file to be included in the package.
+# before_build:
+#   - curl https://some.url --output some.file
+#   - uglifyjs your.js -c -m -o your.min.js
+
+# To schedule periodic runs, follow the example below:
+# schedule:
+#   job1:
+#     when: every 2 hours
+#     body: {"foo": "bar"}
+#     method: POST
+#     query_params: {"param": "value"}
+#     headers: {"Content-Type": "application/json"}
+#   job2: ...
