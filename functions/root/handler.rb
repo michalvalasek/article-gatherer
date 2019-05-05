@@ -12,7 +12,8 @@ def handler(event)
 
   sites = {
     appsignal: 'https://blog.appsignal.com/',
-    martians: 'https://evilmartians.com/chronicles'
+    martians: 'https://evilmartians.com/chronicles',
+    skylight: 'https://blog.skylight.io',
   }
 
   scraped = sites.map do |site, url|
@@ -29,6 +30,7 @@ def handler(event)
   end
 
   render json: {
+    deploy_env: DEPLOY_ENVIRONMENT,
     scraped: scraped,
     filtered: filtered,
     sg_response: sg_resp
@@ -51,6 +53,16 @@ def scrape_martians(doc)
       site_title: 'Evil Martians',
       title: a.css('h1.post-cover__title').text.strip.gsub(/\s{2,}/, ' '),
       url: "https://evilmartians.com#{a[:href]}"
+    }
+  end
+end
+
+def scrape_skylight(doc)
+  doc.css('h2.post-title>a').map do |a|
+    {
+      site_title: 'Skylight',
+      title: a.text.strip.gsub(/\s{2,}/, ' '),
+      url: "https://blog.skylight.io#{a[:href]}"
     }
   end
 end
