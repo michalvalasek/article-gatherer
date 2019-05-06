@@ -30,7 +30,6 @@ def handler(event)
   end
 
   render json: {
-    deploy_env: DEPLOY_ENVIRONMENT,
     scraped: scraped,
     filtered: filtered,
     sg_response: sg_resp
