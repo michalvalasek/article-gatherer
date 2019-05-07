@@ -13,12 +13,11 @@ def handler(event)
   sites = {
     appsignal: 'https://blog.appsignal.com/',
     martians: 'https://evilmartians.com/chronicles',
-    skylight: 'https://blog.skylight.io',
+    skylight: 'https://blog.skylight.io'
   }
 
   scraped = sites.map do |site, url|
-    next if !respond_to?(:"scrape_#{site}")
-    send("scrape_#{site}", Nokogiri::HTML(open(url)))
+    send("scrape_#{site}", Nokogiri::HTML(open(url))) rescue nil
   end.flatten.compact
 
   filtered = scraped.select do |item|
@@ -32,7 +31,7 @@ def handler(event)
   render json: {
     scraped: scraped,
     filtered: filtered,
-    sg_response: sg_resp
+    sg_response: sg_resp.inspect
   }
 end
 
