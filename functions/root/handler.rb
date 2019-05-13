@@ -13,7 +13,9 @@ def handler(event)
   sites = {
     appsignal: 'https://blog.appsignal.com/',
     martians: 'https://evilmartians.com/chronicles',
-    skylight: 'https://blog.skylight.io'
+    skylight: 'https://blog.skylight.io',
+    devto_elixir: 'https://dev.to/t/elixir',
+    devto_ruby: 'https://dev.to/t/ruby'
   }
 
   scraped = sites.map do |site, url|
@@ -64,6 +66,19 @@ def scrape_skylight(doc)
     }
   end
 end
+
+def scrape_devto(doc, section)
+  doc.css('a.index-article-link').map do |a|
+    {
+      site_title: "DEV.to - #{section}",
+      title: a.css('.content h3').xpath('text()').text.strip.gsub(/\s{2,}/, ' '),
+      url: "https://dev.to#{a[:href]}"
+    }
+  end
+end
+def scrape_devto_ruby(doc); scrape_devto(doc, 'Ruby') end
+def scrape_devto_elixir(doc); scrape_devto(doc, 'Elixir') end
+
 
 def build_email_content(items)
   grouped = items.group_by {|item| item[:site_title] }
