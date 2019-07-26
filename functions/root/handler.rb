@@ -15,7 +15,8 @@ def handler(event)
     martians: 'https://evilmartians.com/chronicles',
     skylight: 'https://blog.skylight.io',
     devto_elixir: 'https://dev.to/t/elixir',
-    devto_ruby: 'https://dev.to/t/ruby'
+    devto_ruby: 'https://dev.to/t/ruby',
+    morning_paper: 'https://blog.acolyer.org'
   }
 
   scraped = sites.map do |site, url|
@@ -79,6 +80,15 @@ end
 def scrape_devto_ruby(doc); scrape_devto(doc, 'Ruby') end
 def scrape_devto_elixir(doc); scrape_devto(doc, 'Elixir') end
 
+def scrape_morning_paper(doc)
+  doc.css('h1.entry-title>a').map do |a|
+    {
+      site_title: 'Morning Paper',
+      title: a.text.strip.gsub(/\s{2,}/, ' '),
+      url: a[:href]
+    }
+  end
+end
 
 def build_email_content(items)
   grouped = items.group_by {|item| item[:site_title] }
